@@ -8,7 +8,7 @@ import {
 import './Home.css';
 
 /* ─────────────────────────────────────────────────────────
-   QUICK SERVICES — CitizenHub-specific shortcuts
+   QUICK SERVICES — Gava Hub-specific shortcuts
 ───────────────────────────────────────────────────────── */
 const quickServices = [
   { icon: <UserPlus size={34} strokeWidth={1.7} />, line1: 'Register as', line2: 'a Candidate', href: '/register' },
@@ -21,14 +21,33 @@ const quickServices = [
   { icon: <CheckCircle size={34} strokeWidth={1.7} />, line1: 'Track', line2: 'Verification Status', href: '/login' },
 ];
 
+const heroImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1800&q=85&auto=format&fit=crop&crop=center',
+    alt: 'Professionals reviewing credentials',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1800&q=85&auto=format&fit=crop&crop=center',
+    alt: 'Skilled technician working with industrial equipment',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1800&q=85&auto=format&fit=crop&crop=center',
+    alt: 'Team reviewing professional records in a meeting',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1800&q=85&auto=format&fit=crop&crop=center',
+    alt: 'Candidates learning and preparing career documents',
+  },
+];
+
 /* ─────────────────────────────────────────────────────────
-   FEATURED EMPLOYERS — real Kenyan companies that would use CitizenHub
+   FEATURED EMPLOYERS — real Kenyan companies that would use Gava Hub
 ───────────────────────────────────────────────────────── */
 const featuredEmployers = [
   {
     initials: 'SF', color: '#007F3D',
     name: 'Safaricom PLC',
-    desc: 'Kenya\'s leading telecommunications company uses CitizenHub to verify candidate credentials before onboarding.',
+    desc: 'Kenya\'s leading telecommunications company uses Gava Hub to verify candidate credentials before onboarding.',
   },
   {
     initials: 'KCB', color: '#006B3F',
@@ -38,22 +57,22 @@ const featuredEmployers = [
   {
     initials: 'EA', color: '#00529B',
     name: 'East African Breweries',
-    desc: 'EABL uses CitizenHub to streamline background checks and credential verification for new hires.',
+    desc: 'EABL uses Gava Hub to streamline background checks and credential verification for new hires.',
   },
   {
     initials: 'NBO', color: '#8B1A1A',
     name: 'Nation Media Group',
-    desc: 'Nation Media verifies journalist credentials, academic certificates and professional licenses via CitizenHub.',
+    desc: 'Nation Media verifies journalist credentials, academic certificates and professional licenses via Gava Hub.',
   },
   {
     initials: 'CBA', color: '#1A237E',
     name: 'NCBA Bank',
-    desc: 'NCBA integrates CitizenHub verification into its HR onboarding workflow for all new staff.',
+    desc: 'NCBA integrates Gava Hub verification into its HR onboarding workflow for all new staff.',
   },
   {
     initials: 'KP', color: '#4A235A',
     name: 'Kenya Power',
-    desc: 'Kenya Power verifies engineering licences and academic qualifications through CitizenHub before hiring.',
+    desc: 'Kenya Power verifies engineering licences and academic qualifications through Gava Hub before hiring.',
   },
 ];
 
@@ -64,7 +83,7 @@ const featuredInstitutions = [
   {
     initials: 'UoN', color: '#003366',
     name: 'University of Nairobi',
-    desc: 'UoN confirms academic transcripts and degree certificates for all alumni through the CitizenHub verification portal.',
+    desc: 'UoN confirms academic transcripts and degree certificates for all alumni through the Gava Hub verification portal.',
   },
   {
     initials: 'KU', color: '#8B0000',
@@ -74,7 +93,7 @@ const featuredInstitutions = [
   {
     initials: 'KNEC', color: '#006400',
     name: 'Kenya National Examinations Council',
-    desc: 'KNEC verifies KCSE, KCPE and TVET examination results and certificates on the CitizenHub platform.',
+    desc: 'KNEC verifies KCSE, KCPE and TVET examination results and certificates on the Gava Hub platform.',
   },
   {
     initials: 'ICT', color: '#0055A4',
@@ -105,7 +124,7 @@ const steps = [
   {
     num: '02',
     title: 'Employer Requests Verification',
-    body: 'An employer finds the candidate and submits a formal verification request through CitizenHub. The request is routed to the relevant institution.',
+    body: 'An employer finds the candidate and submits a formal verification request through Gava Hub. The request is routed to the relevant institution.',
   },
   {
     num: '03',
@@ -156,11 +175,17 @@ const Home: React.FC = () => {
         onMouseEnter={() => setHeadlineRevealed(true)}
         onFocus={() => setHeadlineRevealed(true)}
       >
-        <img
-          className="hero__bg"
-          src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1800&q=85&auto=format&fit=crop&crop=center"
-          alt="Professionals reviewing credentials"
-        />
+        <div className="hero__media">
+          {heroImages.map((image, index) => (
+            <img
+              key={image.src}
+              className="hero__bg"
+              src={image.src}
+              alt={index === 0 ? image.alt : ''}
+              aria-hidden={index === 0 ? undefined : true}
+            />
+          ))}
+        </div>
         <div className="hero__overlay" />
         <div className="hero__content">
           <div className="hero__text-block">
@@ -173,6 +198,16 @@ const Home: React.FC = () => {
       </section>
 
       <section className="service-showcase" aria-label="Popular services">
+        <div className="service-showcase__media" aria-hidden="true">
+          {heroImages.map(image => (
+            <img
+              key={`panel-${image.src}`}
+              className="service-showcase__bg"
+              src={image.src}
+              alt=""
+            />
+          ))}
+        </div>
         <div className="service-panel">
           <div className="service-panel__top">
             <div className="hero__search-box">
@@ -213,7 +248,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="service-panel__footer">
-            <p className="service-panel__cta-label">Get started on CitizenHub today</p>
+            <p className="service-panel__cta-label">Get started on Gava Hub today</p>
             <div className="service-panel__btns">
               <Link to="/login" className="service-panel__btn service-panel__btn--ghost">Sign in</Link>
               <Link to="/register" className="service-panel__btn service-panel__btn--solid">Register</Link>
@@ -232,7 +267,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
           <p className="section-subtitle">
-            Leading Kenyan organisations that trust CitizenHub to verify candidate credentials before hiring.
+            Leading Kenyan organisations that trust Gava Hub to verify candidate credentials before hiring.
           </p>
           <div className="cards-grid">
             {featuredEmployers.map((e, i) => (
@@ -261,7 +296,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
           <p className="section-subtitle">
-            Universities, TVETs, professional bodies and certification authorities that confirm credentials on CitizenHub.
+            Universities, TVETs, professional bodies and certification authorities that confirm credentials on Gava Hub.
           </p>
           <div className="cards-grid">
             {featuredInstitutions.map((inst, i) => (
@@ -284,7 +319,7 @@ const Home: React.FC = () => {
       <section className="how-section">
         <div className="how-section__inner">
           <div className="section-title-row">
-            <h2>How Citizen Hub Works</h2>
+            <h2>How Gava Hub Works</h2>
             <Link to="/how-it-works" className="view-all">
               Learn more <ExternalLink size={13} />
             </Link>
@@ -333,7 +368,7 @@ const Home: React.FC = () => {
             <h2>Documents Supported</h2>
           </div>
           <p className="section-subtitle">
-            Candidates can upload and get any of the following documents verified on Citizen Hub.
+            Candidates can upload and get any of the following documents verified on Gava Hub.
           </p>
           <div className="docs-grid">
             {[
@@ -362,7 +397,7 @@ const Home: React.FC = () => {
             <h2>Verified People. Trusted Hiring.</h2>
             <p>
               Join thousands of Kenyan professionals and employers building a more
-              trustworthy hiring ecosystem through Citizen Hub.
+              trustworthy hiring ecosystem through Gava Hub.
             </p>
           </div>
           <div className="cta-strip__actions">

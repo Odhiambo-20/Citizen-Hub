@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
             <path d="M14 20L18 24L26 16" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           <span className="navbar__logo-wordmark">
-            Citizen<strong>Hub</strong>
+            Gava<strong>Hub</strong>
           </span>
         </Link>
 
